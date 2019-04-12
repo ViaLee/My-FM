@@ -115,7 +115,7 @@
             itemclick(data)
         },
         render: function (channels) {
-            $.getJSON('http://api.jirengu.com/fm/getChannels.php').done((data1) => {
+            $.getJSON('https://api.jirengu.com/fm/getChannels.php').done((data1) => {
                 // console.log(data1.channels)
                 let list = $('#channelList h3')
                 var length = data1.channels.length
@@ -165,7 +165,7 @@
                     })
                  }
             }
-            $.getJSON('http://api.jirengu.com/fm/getSong.php', { channel: id }).done((data1) => {
+            $.getJSON('https://api.jirengu.com/fm/getSong.php', { channel: id }).done((data1) => {
             })
                 .then((data1) => {
                     $('main .left > figure').css('background-image', `url(` + data1.song[0].picture + `)`)

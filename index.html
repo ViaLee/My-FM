@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://at.alicdn.com/t/font_1134913_4tzkislrxwm.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <title>MY FM</title>
+</head>
+
+<body>
+    <section id="page-main">
+        <main class="main">
+            <div class="left">
+                <!-- <audio id="music" src="http://cloud.hunger-valley.com/music/玫瑰.mp3">你的浏览器不支持喔！</audio> -->
+                <figure></figure>
+                <ul class="buttons">
+                    <li class="like">
+                        <svg class="icon icon1" aria-hidden="true">
+                            <use xlink:href="#icon-like"></use>
+                        </svg>
+                    </li>
+                    <li class="like">
+                        <svg class="icon icon1" aria-hidden="true">
+                            <use xlink:href="#icon-pause-circle-outline"></use>
+                        </svg>
+                    </li>
+                    <li class="like">
+                        <svg class="icon icon1" aria-hidden="true">
+                            <use xlink:href="#icon-next-song"></use>
+                        </svg>
+                    </li>
+                </ul>
+            </div>
+            <div class="right">
+                <div class="top">
+                    <div class="term">频道名</div>
+                    <div class="song">歌名</div>
+                </div>
+                <ul class="middle">
+                    <li>
+                        <svg class="icon icon2" aria-hidden="true">
+                            <use xlink:href="#icon-listen1"></use>
+                        </svg>
+                        <span>播放数</span>
+                    </li>
+                    <li>
+                        <svg class="icon icon2" aria-hidden="true">
+                            <use xlink:href="#icon-like2"></use>
+                        </svg>
+                        <span>喜欢书</span>
+                    </li>
+                    <li>
+                        <svg class="icon icon2" aria-hidden="true">
+                            <use xlink:href="#icon-like4"></use>
+                        </svg>
+                        <span>点赞数</span>
+                    </li>
+                </ul>
+                <div class="bottom">
+                    <!-- <div> -->
+                    <div class="bar">
+                        <div class="bar-progress"></div>
+                        <div class="long">1:20</div>
+                    </div>
+                    <div class="singer">歌手</div>
+                    <!-- </div> -->
+                </div>
+            </div>
+            </div>
+        </main>
+        <footer>
+            <div class="layout">
+                <div class="iconleft" id="footerLast">
+                    <svg class="icon icon1 icon3" aria-hidden="true">
+                        <use xlink:href="#icon-left"></use>
+                    </svg>
+                </div>
+                <div class="iconright" id="footerNext">
+                    <svg class="icon icon1 icon3" aria-hidden="true">
+                        <use xlink:href="#icon-right"></use>
+                    </svg>
+                </div>
+                <div class="box" id="channelList">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </section>
+    <section id="page-cover"></section>
+    <div class="bg">jk</div>
+</body>
+<script>
+    //事件中心
+    // function getAudioObject(){
+    //     var audioObject = document.querySelector('#music')
+    //     audioObject.autoplay = false
+    //     console.log(audioObject.__proto__)
+    // }
+    // function setChannel () {
+    // }
+    var footer = {
+        init: function () {
+            this.$footer = $('footer')
+            // console.log(123)
+            this.render()
+        },
+        bind: function (data) {
+            footernext()
+            footerlast()
+            itemclick(data)
+        },
+        render: function (channels) {
+            $.getJSON('http://api.jirengu.com/fm/getChannels.php').done((data1) => {
+                // console.log(data1.channels)
+                let list = $('#channelList h3')
+                var length = data1.channels.length
+                var i
+                for (i = 0; i < length; i++) {
+                    var str = `<li>
+                            <div class="cover" id="`+ data1.channels[i].channel_id + `" style="background-image:url(` + data1.channels[i].cover_small + `)"></div>
+                            <h3>`+ data1.channels[i].name + `</h3>
+                        </li>`
+                    // console.log(12333)
+                    $('footer ul').append(str)
+                }
+            }).then((data1) => {
+                this.bind(data1)
+            })
+        }
+    }
+    function footerlast() {
+        var divwidth = $('#channelList').css('width')
+        var itemwidth = $('#channelList ul').find('li').outerWidth(true)
+        var count = parseInt($('.box').width() / itemwidth)
+        var x = itemwidth * count
+        $('footer #footerLast').on('click', () => {
+            if (parseInt($('#channelList > ul').css('left')) < 0) {
+                $('#channelList > ul').css('left', '+=' + x).addClass('tsfX')
+            }
+        })
+    }
+    function footernext() {
+        var divwidth = $('#channelList').css('width')
+        var itemwidth = $('#channelList ul').find('li').outerWidth(true)
+        var count = parseInt($('.box').width() / itemwidth)
+        var x = itemwidth * count
+        $('footer #footerNext').on('click', () => {
+            if (parseInt($('#channelList > ul').css('left')) > -5367) {
+                $('#channelList > ul').css('left', '-=' + x).addClass('tsfX')
+            }
+        })
+    }
+    function itemclick(data) {
+        $('footer .box ul li div').on('click', (e) => {
+            var id = e.currentTarget.id
+            for (var i = 0; i < data.channels.length; i++) {
+                if (id === data.channels[i].channel_id) {
+                    $('footer .box ul li').on('click', (e) => {
+                        $('.term').text($(e.currentTarget).find('h3')[0].textContent)
+                    })
+                 }
+            }
+            $.getJSON('http://api.jirengu.com/fm/getSong.php', { channel: id }).done((data1) => {
+            })
+                .then((data1) => {
+                    $('main .left > figure').css('background-image', `url(` + data1.song[0].picture + `)`)
+                    $('.singer').text(data1.song[0].artist)
+                    $('.song').text(data1.song[0].title)
+                    console.log(data1)
+                    var url = data1.song[0].url
+                    $('main').append(`
+                      <audio id="music" src="">你的浏览器不支持喔！</audio>`)
+                    var audioObject = document.querySelector('#music')
+                    audioObject.src = url
+                    audioObject.autoplay = true
+                    audioObject.volume = 0.3
+                })
+        })
+    }
+
+    footer.init()
+</script>
+
+</html>

@@ -1,0 +1,203 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.bg{
+    background-color: antiquewhite;
+    background:url(img/flower.jpeg) center center no-repeat;
+    background-size: cover;
+    position: absolute;
+    z-index: -1;
+    left: -10px;
+    top: -10px;
+    bottom: -10px;
+    right: -10px;
+    filter: blur(4px);
+}
+.bg::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,0.2);  
+  }
+  #page-cover {
+    display: none;
+  }
+  #page-main{
+      height: 100vh;
+  }
+.main{
+    padding: 30px;
+    display: flex;
+    padding-top: 11vh;
+    height: calc(100% - 24vh); /* 1vh == 0.125px */
+}
+main::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.main > .left{
+    margin-left: 7vh;
+    margin-right: 2vh;
+}
+.main > .left > ul{
+    margin-top: 10px;
+}
+#page-main > .main > .left > ul > li{
+    /* word-break: keep-all; */
+    list-style: none;
+    display: inline-flex;
+    width: 19vh;
+    overflow: visible;
+    justify-content: space-between;
+}
+.main > .right > .top{
+    margin-bottom: 20px;
+}
+.main > .right > .top > .term{
+    background-color: #3d5f64;
+    padding: .6vh 1vh;
+    /* width: 5.1vw; */
+    width: 8vw;
+    box-sizing: border-box;
+    word-break: keep-all;
+    text-align: center;
+    font-size: 2.4vh;
+    color: #bee2e7;
+}
+.main > .right > .top > .song{
+    color: #bee2e7;
+    font-size: 5vh;
+}
+.main > .right > .middle{
+    margin-top: 14vh;
+}
+.main > .right > .middle > li{
+    /* word-break: keep-all; */
+    list-style: none;
+    display: inline-flex;
+    overflow: visible;
+    font-size: 2vh;
+    color: #bee2e7;
+    justify-content: space-between;
+}
+.main > .right > .bottom{
+    margin-top: 14vh;
+}
+main .left > figure{
+    width: 46vh;
+    height: 46vh;
+    background-image: url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-middle);
+    background-size: cover;
+    position-position: center center;
+  }
+
+  main > .right >.bottom > .bar > .bar-progress{
+      width: 78vh;
+      height: 8px;
+      max-width: 570px;
+      background-color: rgba(190, 226, 231, 0.3);
+      box-sizing: border-box;
+      border-radius: 10px;
+      border-left:20px solid #1f3235;
+  }
+
+  main > .right >.bottom > .bar > .long{
+      margin-top: 5px;
+      font-size: 2vh; 
+      /* display: inline-block; */
+      color: #bee2e7;
+  }
+  main > .right >.bottom > .singer{
+      font-size: 3vh;
+      margin-top: 4px;
+      color: #bee2e7;
+  }
+  .icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+ }
+ .icon1{
+    font-size: 7vh;
+ }
+ .icon2{
+    font-size: 4vh;
+ }
+ .icon3{
+     font-size: 7vh;
+ }
+footer {
+    height: 24vh;
+    position: relative;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0px -.25vh .25vh .25vh rgba(255,255,255,0.2);
+  }
+  footer>.layout{
+    position: relative;
+    bottom: 0;
+  }
+footer > .layout > .iconleft,
+footer > .layout > .iconright
+{
+    position: relative;
+    top: 8vh;
+}
+footer > .layout > .iconleft{
+    float: left;
+}
+footer > .layout > .iconright{
+    float: right;
+}
+footer .box{
+    position: relative;
+    overflow: hidden;
+    height: 24vh;
+}
+
+footer ul{
+    position: absolute;
+    width: 900vw;
+    left: 0;
+    overflow: hidden;
+  }
+  .tsfX{
+    transition: all 1s;
+  }
+  footer ul:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+  footer li{
+    float: left;
+    margin-top: 1vh;
+    margin: 2vh 2vh 0 2vh;
+    width: 20vh;
+    height: 20vh;
+    color: #bee2e7;
+    text-align: center;
+    cursor: pointer;
+  }
+  footer li:hover {
+    box-shadow: 0 0 .5vh .5vh rgba(255,255,255,0.8);
+  }
+  footer li .cover {
+    height: 16vh;
+    background-size: cover;
+    background-position: center center;
+  }
+  footer li{
+      list-style: none;
+  }
+  .icon1:hover{
+      box-shadow: 0 0 .5vh .5vh rgba(255,255,255,0.8);
+      border-radius: 40px;
+  }

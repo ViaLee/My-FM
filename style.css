@@ -31,7 +31,9 @@
       height: 100vh;
   }
 .main{
-    padding: 30px;
+    display: flex;
+    justify-content: center;
+    position: relative;
     display: flex;
     padding-top: 11vh;
     height: calc(100% - 24vh); /* 1vh == 0.125px */
@@ -42,19 +44,16 @@ main::after{
     clear: both;
 }
 .main > .left{
-    margin-left: 7vh;
-    margin-right: 2vh;
+    margin-right: 8vh;
 }
-.main > .left > ul{
-    margin-top: 10px;
+.main > .left > .buttons{
+    margin-top: 18px;
+    width: 46vh;
+    display: flex;
+    justify-content: space-between;
 }
 #page-main > .main > .left > ul > li{
-    /* word-break: keep-all; */
     list-style: none;
-    display: inline-flex;
-    width: 19vh;
-    overflow: visible;
-    justify-content: space-between;
 }
 .main > .right > .top{
     margin-bottom: 20px;
@@ -86,6 +85,12 @@ main::after{
     color: #bee2e7;
     justify-content: space-between;
 }
+#play{
+    display: none;
+}
+#pause{
+    display: block;
+}
 .main > .right > .bottom{
     margin-top: 14vh;
 }
@@ -98,7 +103,7 @@ main .left > figure{
   }
 
   main > .right >.bottom > .bar > .bar-progress{
-      width: 78vh;
+      width: 93vh;
       height: 8px;
       max-width: 570px;
       background-color: rgba(190, 226, 231, 0.3);
@@ -134,7 +139,6 @@ main .left > figure{
      font-size: 7vh;
  }
 footer {
-    height: 24vh;
     position: relative;
     color: #fff;
     background: rgba(255, 255, 255, 0.2);
@@ -166,7 +170,7 @@ footer ul{
     position: absolute;
     width: 900vw;
     left: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
   .tsfX{
     transition: all 1s;
@@ -183,6 +187,7 @@ footer ul{
     width: 20vh;
     height: 20vh;
     color: #bee2e7;
+    list-style: none;
     text-align: center;
     cursor: pointer;
   }
@@ -194,10 +199,11 @@ footer ul{
     background-size: cover;
     background-position: center center;
   }
-  footer li{
-      list-style: none;
-  }
+
   .icon1:hover{
       box-shadow: 0 0 .5vh .5vh rgba(255,255,255,0.8);
       border-radius: 40px;
+  }
+  .active{
+    box-shadow: 0 0 .5vh .5vh rgba(255,255,255,0.8);
   }

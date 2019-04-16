@@ -167,7 +167,7 @@
             var _this = this
             console.log(1231)
             console.log(_this)
-            $.getJSON('http://api.jirengu.com/fm/getSong.php', { channel: _this.channelId }).done((data1) => {
+            $.getJSON('https://jirenguapi.applinzi.com/fm/getSong.php', { channel: _this.channelId }).done((data1) => {
                 $('.bg').css('background-image', 'url(' + data1.song[0].picture + ')')
                 $('main .left > figure').css('background-image', `url(` + data1.song[0].picture + `)`)
                 $('.singer').text(data1.song[0].artist)
@@ -198,7 +198,7 @@
             var _this = this
             console.log(123123123)
             console.log(data.song[0].sid)
-            $.getJSON('http://jirenguapi.applinzi.com/fm/getLyric.php', { sid: data.song[0].sid }).done(function (ret) {
+            $.getJSON('https://jirenguapi.applinzi.com/fm/getSong.php', { sid: data.song[0].sid }).done(function (ret) {
                 var lyric = ret.lyric
                 var lyricObj = {}
                 lyric.split('\n').forEach(function (line) {
@@ -252,7 +252,7 @@
 
         },
         render: function (channels) {
-            $.getJSON('http://api.jirengu.com/fm/getChannels.php').done((data1) => {
+            $.getJSON('https://jirenguapi.applinzi.com/fm/getChannels.php').done((data1) => {
                 // console.log(data1.channels)
                 let list = $('#channelList h3')
                 var length = data1.channels.length

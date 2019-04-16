@@ -165,8 +165,6 @@
         },
         loadmusic: function (callback) {
             var _this = this
-            console.log(1231)
-            console.log(_this)
             $.getJSON('https://jirenguapi.applinzi.com/fm/getSong.php', { channel: _this.channelId }).done((data1) => {
                 $('.bg').css('background-image', 'url(' + data1.song[0].picture + ')')
                 $('main .left > figure').css('background-image', `url(` + data1.song[0].picture + `)`)
@@ -187,7 +185,6 @@
             second = second.length === 2 ? second : '0' + second
             $('#songduration').text(min + ':' + second)
             $('.bar-progress').css('width', this.audioObject.currentTime / this.audioObject.duration * 100 + '%')
-
             var line = this.lyricObj['0' + min + ':' + second]
             if (line) {
                 $('main .lyric p').text(line)
@@ -196,9 +193,8 @@
         },
         loadLyric(data) {
             var _this = this
-            console.log(123123123)
-            console.log(data.song[0].sid)
-            $.getJSON('https://jirenguapi.applinzi.com/fm/getSong.php', { sid: data.song[0].sid }).done(function (ret) {
+            $.getJSON('https://jirenguapi.applinzi.com/fm/getLyric.php', { sid: data.song[0].sid }).done(function (ret) {
+                
                 var lyric = ret.lyric
                 var lyricObj = {}
                 lyric.split('\n').forEach(function (line) {

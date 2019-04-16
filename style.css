@@ -3,6 +3,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+html{
+    overflow: hidden;
+}
 .bg{
     background-color: antiquewhite;
     background:url(img/flower.jpeg) center center no-repeat;
@@ -138,7 +142,7 @@ main .left > figure{
   main .lyric {
     font-size: 2vh;
     margin-top: 2vh;
-    color: rgb(190, 226, 231);
+    color: #bee2e7;
   }
 
  .icon1{
@@ -149,7 +153,8 @@ main .left > figure{
     font-size: 4vh!important;
  }
  .icon3{
-     font-size: 5vh!important;
+    color: rgba(190, 226, 231, 0.3);
+    font-size: 5vh!important;
  }
 footer {
     position: relative;
@@ -170,9 +175,12 @@ footer > .layout > .iconright
 }
 footer > .layout > .iconleft{
     float: left;
+    margin-left: 10px;
 }
 footer > .layout > .iconright{
     float: right;
+    margin-left: 13px;
+    margin-right: 10px;
 }
 footer .box{
     position: relative;
@@ -182,7 +190,7 @@ footer .box{
 
 footer ul{
     position: absolute;
-    width: 900vw;
+    width: 630vw;
     left: 0;
     /* overflow: hidden; */
   }
@@ -218,6 +226,12 @@ footer ul{
       box-shadow: 0 0 .5vh .5vh rgba(255,255,255,0.8);
       border-radius: 40px;
   }
+
+  .icon3:hover{
+    color: #bee2e7;
+    font-weight: 1000;
+}
+
   .active{
     box-shadow: 0 0 .5vh .5vh rgba(255,255,255,0.8);
   }

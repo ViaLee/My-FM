@@ -61,7 +61,7 @@ var fm = {
             clearInterval(_this.statusClock)
             _this.statusClock = setInterval(function () {
                 _this.updateStatus()
-            }, 1000)
+            }, 1100)
 
         })
 

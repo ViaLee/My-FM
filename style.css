@@ -102,14 +102,25 @@ main .left > figure{
     position-position: center center;
   }
 
-  main > .right >.bottom > .bar > .bar-progress{
-      width: 93vh;
-      height: 8px;
-      max-width: 570px;
-      background-color: rgba(190, 226, 231, 0.3);
+  main > .right >.bottom > .bar >._bar{
+    position: relative;
+    flex: 1;
+    height: .8vh;
+    border-radius: .2vh;
+    width: 84vh;
+    background-color: rgba(190, 226, 231, 0.3);
+  }
+
+  main > .right >.bottom > .bar  .bar-progress{
+      /* width: 93vh; */
+      height: .8vh;
       box-sizing: border-box;
-      border-radius: 10px;
-      border-left:20px solid #1f3235;
+      background-color: rgb(53, 96, 99);
+
+      position: absolute;
+      width: 0%;
+      border-radius: .2vh;
+      transition: width .8s;
   }
 
   main > .right >.bottom > .bar > .long{
@@ -123,20 +134,22 @@ main .left > figure{
       margin-top: 4px;
       color: #bee2e7;
   }
-  .icon {
-    width: 1em; height: 1em;
-    vertical-align: -0.15em;
-    fill: currentColor;
-    overflow: hidden;
- }
+
+  main .lyric {
+    font-size: 2vh;
+    margin-top: 2vh;
+    color: rgb(190, 226, 231);
+  }
+
  .icon1{
-    font-size: 7vh;
+    font-size: 7vh!important;
+    color: #bee2e7;
  }
  .icon2{
-    font-size: 4vh;
+    font-size: 4vh!important;
  }
  .icon3{
-     font-size: 7vh;
+     font-size: 5vh!important;
  }
 footer {
     position: relative;
@@ -153,6 +166,7 @@ footer > .layout > .iconright
 {
     position: relative;
     top: 8vh;
+    font-size: 30px;
 }
 footer > .layout > .iconleft{
     float: left;
@@ -206,4 +220,8 @@ footer ul{
   }
   .active{
     box-shadow: 0 0 .5vh .5vh rgba(255,255,255,0.8);
+  }
+  .boomText {
+    display: inline-block;
+    opacity: 0;
   }

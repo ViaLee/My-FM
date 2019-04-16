@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
-    <script src="https://at.alicdn.com/t/font_1134913_4tzkislrxwm.js"></script>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1134913_4tzkislrxwm.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css">
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <title>MY FM</title>
 </head>
@@ -18,25 +19,11 @@
             <div class="left">
                 <figure></figure>
                 <ul class="buttons">
-                    <li class="like" id="like">
-                        <svg class="icon icon1" aria-hidden="true">
-                            <use xlink:href="#icon-like"></use>
-                        </svg>
+                    <li class="like iconfont icon1 icon-like" id="like">
                     </li>
-                    <li class="like" id="pause">
-                        <svg class="icon icon1" aria-hidden="true">
-                            <use xlink:href="#icon-pause-circle-outline"></use>
-                        </svg>
+                    <li class="like iconfont icon1 icon-play-circle-outline" id="pause">
                     </li>
-                    <li class="like" id="play">
-                        <svg class="icon icon1" aria-hidden="true">
-                            <use xlink:href="#icon-pause-circle-outline"></use>
-                        </svg>
-                    </li>
-                    <li class="like" id="nextsong">
-                        <svg class="icon icon1" aria-hidden="true">
-                            <use xlink:href="#icon-next-song"></use>
-                        </svg>
+                    <li class="like iconfont icon1 icon-next-song" id="nextsong">
                     </li>
                 </ul>
             </div>
@@ -47,30 +34,32 @@
                 </div>
                 <ul class="middle">
                     <li>
-                        <svg class="icon icon2" aria-hidden="true">
-                            <use xlink:href="#icon-listen1"></use>
-                        </svg>
-                        <span>播放数</span>
+                        <i class="iconfont icon2 icon-listen1">
+                        </i>
+                        <span>20</span>
                     </li>
                     <li>
-                        <svg class="icon icon2" aria-hidden="true">
-                            <use xlink:href="#icon-like2"></use>
-                        </svg>
-                        <span>喜欢书</span>
+                        <i class="iconfont icon2 icon-like2">
+                        </i>
+                        <span>999</span>
                     </li>
-                    <li>
-                        <svg class="icon icon2" aria-hidden="true">
-                            <use xlink:href="#icon-like4"></use>
-                        </svg>
-                        <span>点赞数</span>
+                    <li id="likecount">
+                        <i class="iconfont icon2 icon-like4">
+                        </i>
+                        <span>1023</span>
                     </li>
                 </ul>
                 <div class="bottom">
                     <div class="bar">
-                        <div class="bar-progress"></div>
-                        <div class="long" id="songduration">1:20</div>
+                        <div class="_bar">
+                            <div class="bar-progress"></div>
+                        </div>
+                        <div class="long" id="songduration">0:00</div>
                     </div>
                     <div class="singer">歌手</div>
+                    <div class="lyric">
+                            <p> </p>
+                    </div>
                 </div>
             </div>
             </div>
@@ -78,14 +67,12 @@
         <footer>
             <div class="layout">
                 <div class="iconleft" id="footerLast">
-                    <svg class="icon icon1 icon3" aria-hidden="true">
-                        <use xlink:href="#icon-left"></use>
-                    </svg>
+                    <i class="iconfont icon1 icon3 icon-left">
+                    </i>
                 </div>
                 <div class="iconright" id="footerNext">
-                    <svg class="icon icon1 icon3" aria-hidden="true">
-                        <use xlink:href="#icon-right"></use>
-                    </svg>
+                    <i class="iconfont icon1 icon3 icon-right">
+                    </i>
                 </div>
                 <div class="box" id="channelList">
                     <ul>
@@ -130,18 +117,56 @@
                 // console.log(_this.currentTime)
             })
 
-             $('main .left #pause').on('click', () => {
-                this.audioObject.pause()
-                // $('main .left #pause svg > use').attr('xlink:href', 'icon-play-circle-outline')
-                //     $('main .left #play').css('display', 'block')
-                // }, 100)
+            $('main .left #like').on('click', (e) => {
+                if ($(e.currentTarget).hasClass('icon-like')) {
+                    $('#likecount span').text(parseInt($('#likecount span').text()) + 1)
+                    $(e.currentTarget).removeClass('icon-like').addClass('icon-like4')
+                } else if ($(e.currentTarget).hasClass('icon-like4')) {
+                    $('#likecount span').text(parseInt($('#likecount span').text()) - 1)
+                    $(e.currentTarget).removeClass('icon-like4').addClass('icon-like')
+                }
+            })
+
+            $('main .left #nextsong').on('click', (e) => {
+                $('#like').removeClass('icon-like4').addClass('icon-like')
+                _this.loadmusic()
+                $('#pause').removeClass('icon-play-circle-outline').addClass('icon-pause-circle-outline')
+            })
+
+            $('main .left #pause').on('click', () => {
+                if ($('#pause').hasClass('icon-pause-circle-outline')) {
+                    this.audioObject.pause()
+                    $('#pause').removeClass('icon-pause-circle-outline').addClass('icon-play-circle-outline')
+                } else {
+                    this.audioObject.play()
+                    $('#pause').removeClass('icon-play-circle-outline').addClass('icon-pause-circle-outline')
+                }
+            })
+
+
+            _this.audioObject.addEventListener('play', function () {
+                clearInterval(_this.statusClock)
+                _this.statusClock = setInterval(function () {
+                    _this.updateStatus()
+                }, 1000)
+
+            })
+
+            _this.audioObject.addEventListener('pause', function () {
+                clearInterval(_this.statusClock)
+                console.log('pause')
+            })
+
+            _this.audioObject.addEventListener('ended', function () {
+                console.log('ended')
+                _this.loadmusic()
             })
         },
-        loadmusic: function () {
+        loadmusic: function (callback) {
             var _this = this
+            console.log(1231)
             console.log(_this)
             $.getJSON('http://api.jirengu.com/fm/getSong.php', { channel: _this.channelId }).done((data1) => {
-                console.log(data1)
                 $('.bg').css('background-image', 'url(' + data1.song[0].picture + ')')
                 $('main .left > figure').css('background-image', `url(` + data1.song[0].picture + `)`)
                 $('.singer').text(data1.song[0].artist)
@@ -151,14 +176,42 @@
                 _this.audioObject.addEventListener('playing', function (e) {
                     _this.duration = _this.audioObject.duration
                 })
-
+                _this.loadLyric(data1)
                 $('songduration').text(_this.audioObject.duration)
-            }).then(() => {
-                currenttime = setInterval(() => {
-                    _this.currentTime = _this.audioObject.currentTime + 1
-                    console.log(parseInt(_this.currentTime))
-                    window.clearInterval('currenttime')
-                }, 1010)
+            })
+        },
+        updateStatus() {
+            var min = Math.floor(this.audioObject.currentTime / 60)
+            var second = Math.floor(fm.audioObject.currentTime % 60) + ''
+            second = second.length === 2 ? second : '0' + second
+            $('#songduration').text(min + ':' + second)
+            $('.bar-progress').css('width', this.audioObject.currentTime / this.audioObject.duration * 100 + '%')
+
+            var line = this.lyricObj['0' + min + ':' + second]
+            if (line) {
+                $('main .lyric p').text(line)
+                    .boomText()
+            }
+        },
+        loadLyric(data) {
+            var _this = this
+            console.log(123123123)
+            console.log(data.song[0].sid)
+            $.getJSON('http://jirenguapi.applinzi.com/fm/getLyric.php', { sid: data.song[0].sid }).done(function (ret) {
+                var lyric = ret.lyric
+                var lyricObj = {}
+                lyric.split('\n').forEach(function (line) {
+                    //[01:10.25][01:20.25]It a new day
+                    var times = line.match(/\d{2}:\d{2}/g)
+                    //times == ['01:10.25', '01:20.25']
+                    var str = line.replace(/\[.+?\]/g, '')
+                    if (Array.isArray(times)) {
+                        times.forEach(function (time) {
+                            lyricObj[time] = str
+                        })
+                    }
+                })
+                _this.lyricObj = lyricObj
             })
         }
     }
@@ -188,8 +241,8 @@
             })
             this.$footer.on('click', 'li', function () {
                 console.log(this)
-                $(this).addClass('active')
-                    .siblings().removeClass('active')
+                $(this).addClass('active').siblings().removeClass('active')
+                $('#pause').removeClass('icon-play-circle-outline').addClass('icon-pause-circle-outline')
                 EventCenter.fire('selectChannel', {  //jquery中用attr()方法来获取和设置元素属性
                     channelId: $(this).find('div').attr('id'),
                     channelName: $(this).find('h3').text()
@@ -215,6 +268,29 @@
             })
         }
     }
+
+$.fn.boomText = function(type){
+  type = type || 'rollIn'
+  console.log(type)
+  this.html(function(){
+    var arr = $(this).text()
+    .split('').map(function(word){
+        return '<span class="boomText">'+ word + '</span>'
+    })
+    return arr.join('')
+  })
+  
+  var index = 0
+  var $boomTexts = $(this).find('span')
+  var clock = setInterval(function(){
+    $boomTexts.eq(index).addClass('animated ' + type)
+    index++
+    if(index >= $boomTexts.length){
+      clearInterval(clock)
+    }
+  }, 300)
+}
+
     fm.init()
     footer.init()
 </script>

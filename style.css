@@ -188,12 +188,18 @@ footer .box{
     height: 24vh;
 }
 
-footer ul{
+footer ul li h3{
+    margin-top: 6px;
+    /* overflow: hidden; */
+  }
+
+  footer ul{
     position: absolute;
     width: 630vw;
     left: 0;
     /* overflow: hidden; */
   }
+
   .tsfX{
     transition: all 1s;
   }
@@ -207,7 +213,7 @@ footer ul{
     margin-top: 1vh;
     margin: 2vh 2vh 0 2vh;
     width: 20vh;
-    height: 20vh;
+    height: 21vh;
     color: #bee2e7;
     list-style: none;
     text-align: center;

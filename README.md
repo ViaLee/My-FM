@@ -1,6 +1,5 @@
 — — — — 存在的问题 - - - -
-  1.getSong接口只能用http协议，https不可
-  2.获取音乐 403 百度设置了权限 
+  获取音乐 403 百度设置了权限 
   解决：将发送请求的url设置为空
   <!-- <meta name="referrer" content="never"> -->
 
